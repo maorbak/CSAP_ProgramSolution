@@ -10,7 +10,7 @@ device = {
     "password": "C1sco12345",
 }
 # Git repository details
-git_repo_url = "https://github.com/your-repository"
+git_repo_url = "https://github.com/maorbak/CSAP_ProgramSolution.git"
 commit_message = "Automatic config update"
 
 

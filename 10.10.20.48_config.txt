@@ -1,9 +1,9 @@
 
 Building configuration...
 
-Current configuration : 4302 bytes
+Current configuration : 5032 bytes
 !
-! Last configuration change at 15:38:50 UTC Tue Feb 23 2021 by developer
+! Last configuration change at 13:01:13 UTC Wed Feb 24 2021 by developer
 !
 version 16.9
 service timestamps debug datetime msec
@@ -17,6 +17,26 @@ hostname csr1000v-1
 boot-start-marker
 boot-end-marker
 !
+!
+vrf definition Loopback12
+!
+vrf definition MISSION
+!
+vrf definition MarisPod
+ description MarisPod VRF
+ rd 1:12
+!
+vrf definition blue
+ description Blue VRF
+ rd 1:410
+!
+vrf definition green
+ description Green VRF
+ rd 1:420
+!
+vrf definition red
+ description Red VRF
+ rd 1:400
 !
 no logging console
 enable secret 5 $1$20ue$uC.uSGo6nvfWs63EjjzRP.
@@ -135,6 +155,30 @@ redundancy
 ! 
 ! 
 !
+!
+interface Loopback12
+ description Pod Number 12
+ ip address 10.111.12.1 255.255.255.255
+!
+interface Loopback1112
+ description Pod Number 1112
+ vrf forwarding red
+ no ip address
+!
+interface Loopback1212
+ description Pod Number 1212
+ vrf forwarding blue
+ no ip address
+!
+interface Loopback1312
+ description Pod Number 1312
+ vrf forwarding green
+ no ip address
+!
+interface Loopback1412
+ description Pod Number 1412
+ vrf forwarding MarisPod
+ no ip address
 !
 interface GigabitEthernet1
  description MANAGEMENT INTERFACE - DON'T TOUCH ME
